@@ -1,3 +1,18 @@
+def isGreater(a, b):
+    if(len(a) > len(b)):
+        return True
+    elif(len(b) > len(a)):
+        return False
+    else:
+        i = 0
+        while(i < len(a)):
+            if(int(a[i]) > int(b[i])):
+                return True
+            elif(int(a[i]) < int(b[i])):
+                return False
+            else:
+                i += 1
+
 def minus(a, b):
     """
     This function returns the difference of a and b (very large numbers stored in string)
@@ -9,10 +24,15 @@ def minus(a, b):
     It can also be written as: 
     Time complexity = O(max(log a, log b)) where log is taken in base 10
     """
-
+    if(a[0] == "-" and b[0] == "-"):
+        return minus(b[1:], a[1:])
+    elif(a[0] == "-"):
+        return "-" + add(a[1:], b)
+    elif(b[0] == "-"):
+        return add(a, b[1:])
     # For finding whether difference is positive or negative
     flag = 0
-    if(len(b) > len(a) or (len(b) == len(a) and int(b[0]) > int(a[0]))):
+    if(isGreater(b, a)):
         flag  = 1
 
     # Reversing a and b
@@ -72,7 +92,10 @@ def minus(a, b):
     # Removes all excess zero before the number
     if(diff[0] == "-"):
         while(int(diff[1]) == 0):
-            if(len(diff) == 1):
+            if(diff == "-0"):
+                diff = "0"
+                break
+            if(len(diff) == 2):
                 break
             diff = diff[0] + diff[2:]
     else:
@@ -83,12 +106,3 @@ def minus(a, b):
 
     # returning the difference (including - sign if negative)
     return diff
-
-"""
-if(a[0] == "-" and b[0] == "-"):
-    return minus(b[1:], a[1:])
-elif(a[0] == "-"):
-    return "-" + add(a[1:], b)
-elif(b[0] == "-"):
-    return add(a, b[1:])
-"""

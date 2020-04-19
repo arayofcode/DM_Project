@@ -17,19 +17,20 @@ def add(a, b):
         return minus(b, a[1:])
     elif(b[0] == "-"):
         return minus(a, b[1:])
+    
     # Reversing a and b
     a = a[::-1]
     b = b[::-1]
 
     # For iterating through the loop
-    iter_time = max(len(a), len(b))
+    size = max(len(a), len(b))
     
     # String because int cannot have numbers with size > 64 bit
     sum = ""
     carry = 0
     
     # Addition takes place here
-    for i in range(iter_time):
+    for i in range(size):
         # Number at (i + 1)th place of a when a is reversed
         x = 0
         if(i < len(a)):
@@ -49,4 +50,3 @@ def add(a, b):
         sum = str(carry) + sum
     
     return sum
-
