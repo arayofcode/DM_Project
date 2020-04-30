@@ -62,3 +62,12 @@ def times(a, b):
 		return "-" + multiply(a, b[1:])
 	else:
 		return multiply(a, b)
+
+def mod_times(a, b, c):
+	a = simplest_form(a)
+	b = simplest_form(b)
+	c = simplest_form(c)
+
+	input_validity(a, b, c)
+
+	return mod(times(mod(a, c), mod(b, c)), c)
